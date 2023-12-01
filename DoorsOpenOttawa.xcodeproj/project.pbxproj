@@ -8,19 +8,43 @@
 
 /* Begin PBXBuildFile section */
 		7321B3902B0FD8CF00B6BB20 /* DoorsOpenOttawaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321B38F2B0FD8CF00B6BB20 /* DoorsOpenOttawaApp.swift */; };
-		7321B3922B0FD8CF00B6BB20 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321B3912B0FD8CF00B6BB20 /* ContentView.swift */; };
 		7321B3942B0FD8CF00B6BB20 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321B3932B0FD8CF00B6BB20 /* Item.swift */; };
 		7321B3962B0FD8D000B6BB20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3952B0FD8D000B6BB20 /* Assets.xcassets */; };
 		7321B3992B0FD8D000B6BB20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3982B0FD8D000B6BB20 /* Preview Assets.xcassets */; };
+		7321B3A72B0FDF9B00B6BB20 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */; };
+		7321B3A92B0FE01500B6BB20 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */; };
+		736E30ED2B150FD200845781 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E30EC2B150FD200845781 /* DataService.swift */; };
+		736E30EF2B15104E00845781 /* BuildingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E30EE2B15104E00845781 /* BuildingsModel.swift */; };
+		7394C6162B141AEA0016A37E /* BuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394C6152B141AEA0016A37E /* BuildingsView.swift */; };
+		7394C6182B141B0C0016A37E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394C6172B141B0C0016A37E /* ContentView.swift */; };
+		73CC704E2B15246A00105798 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC704D2B15246A00105798 /* DataController.swift */; };
+		73CC70502B15267B00105798 /* BuildingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC704F2B15267B00105798 /* BuildingsDataStore.swift */; };
+		73CC70522B1529B600105798 /* buildings.json in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70512B1529B600105798 /* buildings.json */; };
+		73CC70542B1529C700105798 /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70532B1529C700105798 /* event.json */; };
+		73CC70562B1529D300105798 /* team.json in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70552B1529D200105798 /* team.json */; };
+		73CC70582B15303A00105798 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70572B15303A00105798 /* Localizable.xcstrings */; };
+		73CC705A2B154FF100105798 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC70592B154FF100105798 /* LocationHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7321B38C2B0FD8CF00B6BB20 /* DoorsOpenOttawa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoorsOpenOttawa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7321B38F2B0FD8CF00B6BB20 /* DoorsOpenOttawaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorsOpenOttawaApp.swift; sourceTree = "<group>"; };
-		7321B3912B0FD8CF00B6BB20 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7321B3932B0FD8CF00B6BB20 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		7321B3952B0FD8D000B6BB20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7321B3982B0FD8D000B6BB20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		736E30EC2B150FD200845781 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		736E30EE2B15104E00845781 /* BuildingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsModel.swift; sourceTree = "<group>"; };
+		7394C6152B141AEA0016A37E /* BuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsView.swift; sourceTree = "<group>"; };
+		7394C6172B141B0C0016A37E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		73CC704D2B15246A00105798 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		73CC704F2B15267B00105798 /* BuildingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsDataStore.swift; sourceTree = "<group>"; };
+		73CC70512B1529B600105798 /* buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = buildings.json; path = DoorsOpenOttawa/Assets.xcassets/Data/buildings.dataset/buildings.json; sourceTree = SOURCE_ROOT; };
+		73CC70532B1529C700105798 /* event.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = event.json; path = DoorsOpenOttawa/Assets.xcassets/Data/event.dataset/event.json; sourceTree = SOURCE_ROOT; };
+		73CC70552B1529D200105798 /* team.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = team.json; path = DoorsOpenOttawa/Assets.xcassets/Data/team.dataset/team.json; sourceTree = SOURCE_ROOT; };
+		73CC70572B15303A00105798 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		73CC70592B154FF100105798 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,11 +77,17 @@
 		7321B38E2B0FD8CF00B6BB20 /* DoorsOpenOttawa */ = {
 			isa = PBXGroup;
 			children = (
+				73CC704A2B151BF700105798 /* Model */,
+				7321B3A52B0FDEEE00B6BB20 /* Resources */,
+				7321B3A42B0FDED700B6BB20 /* Helpers */,
+				7321B3A12B0FDEBD00B6BB20 /* ViewModels */,
+				7321B3A32B0FDED000B6BB20 /* Services */,
+				7321B3A02B0FDEAC00B6BB20 /* Views */,
 				7321B38F2B0FD8CF00B6BB20 /* DoorsOpenOttawaApp.swift */,
-				7321B3912B0FD8CF00B6BB20 /* ContentView.swift */,
-				7321B3932B0FD8CF00B6BB20 /* Item.swift */,
 				7321B3952B0FD8D000B6BB20 /* Assets.xcassets */,
 				7321B3972B0FD8D000B6BB20 /* Preview Content */,
+				7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */,
+				73CC70572B15303A00105798 /* Localizable.xcstrings */,
 			);
 			path = DoorsOpenOttawa;
 			sourceTree = "<group>";
@@ -68,6 +98,60 @@
 				7321B3982B0FD8D000B6BB20 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7321B3A02B0FDEAC00B6BB20 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7394C6172B141B0C0016A37E /* ContentView.swift */,
+				7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */,
+				7394C6152B141AEA0016A37E /* BuildingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7321B3A12B0FDEBD00B6BB20 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7321B3932B0FD8CF00B6BB20 /* Item.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		7321B3A32B0FDED000B6BB20 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				736E30EC2B150FD200845781 /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7321B3A42B0FDED700B6BB20 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				73CC704D2B15246A00105798 /* DataController.swift */,
+				73CC70592B154FF100105798 /* LocationHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7321B3A52B0FDEEE00B6BB20 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				73CC70552B1529D200105798 /* team.json */,
+				73CC70532B1529C700105798 /* event.json */,
+				73CC70512B1529B600105798 /* buildings.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		73CC704A2B151BF700105798 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73CC704F2B15267B00105798 /* BuildingsDataStore.swift */,
+				736E30EE2B15104E00845781 /* BuildingsModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +196,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"fr-CA",
 			);
 			mainGroup = 7321B3832B0FD8CF00B6BB20;
 			productRefGroup = 7321B38D2B0FD8CF00B6BB20 /* Products */;
@@ -128,8 +213,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				73CC70542B1529C700105798 /* event.json in Resources */,
+				7321B3A92B0FE01500B6BB20 /* Launch Screen.storyboard in Resources */,
+				73CC70562B1529D300105798 /* team.json in Resources */,
 				7321B3992B0FD8D000B6BB20 /* Preview Assets.xcassets in Resources */,
 				7321B3962B0FD8D000B6BB20 /* Assets.xcassets in Resources */,
+				73CC70582B15303A00105798 /* Localizable.xcstrings in Resources */,
+				73CC70522B1529B600105798 /* buildings.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,8 +230,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7321B3922B0FD8CF00B6BB20 /* ContentView.swift in Sources */,
+				7394C6182B141B0C0016A37E /* ContentView.swift in Sources */,
+				736E30ED2B150FD200845781 /* DataService.swift in Sources */,
+				73CC70502B15267B00105798 /* BuildingsDataStore.swift in Sources */,
+				736E30EF2B15104E00845781 /* BuildingsModel.swift in Sources */,
+				73CC705A2B154FF100105798 /* LocationHelper.swift in Sources */,
+				73CC704E2B15246A00105798 /* DataController.swift in Sources */,
+				7321B3A72B0FDF9B00B6BB20 /* HomeView.swift in Sources */,
 				7321B3942B0FD8CF00B6BB20 /* Item.swift in Sources */,
+				7394C6162B141AEA0016A37E /* BuildingsView.swift in Sources */,
 				7321B3902B0FD8CF00B6BB20 /* DoorsOpenOttawaApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -279,11 +376,14 @@
 				DEVELOPMENT_TEAM = 859UH84UXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenDoors;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -291,9 +391,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.vedla.DoorsOpenOttawa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -308,11 +411,14 @@
 				DEVELOPMENT_TEAM = 859UH84UXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = OpenDoors;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,9 +426,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.vedla.DoorsOpenOttawa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

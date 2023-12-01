@@ -1,0 +1,59 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "00km away" : {
+
+    },
+    "Buildings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buildings"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bâtiments"
+          }
+        }
+      }
+    },
+    "Favorite" : {
+
+    },
+    "Hello, World!" : {
+
+    },
+    "Home" : {
+      "extractionState" : "manual"
+    },
+    "Image of %@" : {
+
+    },
+    "Map" : {
+      "extractionState" : "manual"
+    },
+    "Map goes here!" : {
+
+    },
+    "More" : {
+      "extractionState" : "manual"
+    },
+    "Saved" : {
+      "extractionState" : "manual"
+    },
+    "Saved crap!" : {
+
+    },
+    "Settings Crap!" : {
+
+    },
+    "Share" : {
+
+    }
+  },
+  "version" : "1.0"
+}
