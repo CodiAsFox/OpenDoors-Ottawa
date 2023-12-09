@@ -4,6 +4,21 @@
     "00km away" : {
 
     },
+    "Accessible" : {
+
+    },
+    "All Categories" : {
+
+    },
+    "Apply Filters" : {
+
+    },
+    "Bike Parking" : {
+
+    },
+    "Building name" : {
+
+    },
     "Buildings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -21,7 +36,31 @@
         }
       }
     },
+    "Category" : {
+
+    },
+    "Close" : {
+
+    },
+    "Family Friendly" : {
+
+    },
     "Favorite" : {
+
+    },
+    "Filter" : {
+
+    },
+    "Filter Options" : {
+
+    },
+    "Filters" : {
+
+    },
+    "Free Parking" : {
+
+    },
+    "Guided Tour" : {
 
     },
     "Hello, World!" : {
@@ -36,11 +75,29 @@
     "Map" : {
       "extractionState" : "manual"
     },
-    "Map goes here!" : {
-
-    },
     "More" : {
       "extractionState" : "manual"
+    },
+    "No Results" : {
+
+    },
+    "OC Transpo Nearby" : {
+
+    },
+    "Open on Saturdays" : {
+
+    },
+    "Open on Sundays" : {
+
+    },
+    "Paid Parking" : {
+
+    },
+    "Public Washrooms" : {
+
+    },
+    "Reset Filters" : {
+
     },
     "Saved" : {
       "extractionState" : "manual"
@@ -48,10 +105,16 @@
     "Saved crap!" : {
 
     },
+    "Search" : {
+
+    },
     "Settings Crap!" : {
 
     },
     "Share" : {
+
+    },
+    "Shuttle" : {
 
     }
   },

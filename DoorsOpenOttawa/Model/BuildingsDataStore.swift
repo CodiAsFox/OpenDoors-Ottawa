@@ -7,13 +7,80 @@
 
 import Combine
 import Foundation
+import MapKit
 import SwiftUI
 
-class BuildingsDataStore: ObservableObject {
+class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var buildings: [Building] = []
+	@Published var categories: Set<String> = []
 
-	init() {
+	@Published var isFilteringForNewBuildings = false
+	@Published var searchText = ""
+	@Published var selectedCategory: String = ""
+	@Published var isAccessibleFilter: Bool = false
+	@Published var isFamilyFriendlyFilter: Bool = false
+	@Published var isShuttleFilter: Bool = false
+	@Published var isPublicWashroomsFilter: Bool = false
+	@Published var isFreeParkingFilter: Bool = false
+	@Published var isBikeParkingFilter: Bool = false
+	@Published var isPaidParkingFilter: Bool = false
+	@Published var isGuidedTourFilter: Bool = false
+	@Published var isOCTranspoNearbyFilter: Bool = false
+	@Published var isOpenSaturdayFilter: Bool = false
+	@Published var isOpenSundayFilter: Bool = false
+
+	@Published var filteredBuildings: [Building] = []
+
+	@Published var mapRegion: MKCoordinateRegion = .init(
+		center: CLLocationCoordinate2D(latitude: 45.4215, longitude: -75.6919), // Default center coordinates
+		span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Default zoom level
+	)
+
+	private var locationManager: CLLocationManager?
+
+	override init() {
+		super.init()
+		setupLocationManager()
 		loadBuildingsData()
+	}
+
+	private func setupLocationManager() {
+		locationManager = CLLocationManager()
+		locationManager?.delegate = self
+		locationManager?.desiredAccuracy = kCLLocationAccuracyBest
+		locationManager?.requestWhenInUseAuthorization()
+		locationManager?.startUpdatingLocation()
+	}
+
+	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		if let location = locations.last {
+			updateMapRegion(with: location.coordinate)
+		}
+	}
+
+	func updateMapRegion(with coordinate: CLLocationCoordinate2D) {
+		let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+		mapRegion = MKCoordinateRegion(center: coordinate, span: span)
+	}
+
+	func applyFilters() -> [Building] {
+		let filtered = buildings.filter { building in
+			(!isFilteringForNewBuildings || building.isNew) &&
+				(selectedCategory.isEmpty || building.category == selectedCategory) &&
+				(!isShuttleFilter || building.isShuttle) &&
+				(!isPublicWashroomsFilter || building.isPublicWashrooms) &&
+				(!isAccessibleFilter || building.isAccessible) &&
+				(!isFreeParkingFilter || building.isFreeParking) &&
+				(!isBikeParkingFilter || building.isBikeParking) &&
+				(!isPaidParkingFilter || building.isPaidParking) &&
+				(!isGuidedTourFilter || building.isGuidedTour) &&
+				(!isFamilyFriendlyFilter || building.isFamilyFriendly) &&
+				(!isOCTranspoNearbyFilter || building.isOCTranspoNearby) &&
+				(!isOpenSaturdayFilter || building.isOpenSaturday) &&
+				(!isOpenSundayFilter || building.isOpenSunday) &&
+				(searchText.isEmpty || building.name.localizedCaseInsensitiveContains(searchText))
+		}
+		return filtered
 	}
 
 	private func loadBuildingsData() {
@@ -21,8 +88,37 @@ class BuildingsDataStore: ObservableObject {
 			loadJsonFromAssets()
 		} else {
 			loadJsonFromAssets()
-//			loadJsonFromLocalStorage()
+			// loadJsonFromLocalStorage()
 		}
+	}
+
+	func filterBuildings() {
+		filteredBuildings = applyFilters()
+		print("Filtered buildings: \(filteredBuildings.count)")
+	}
+
+	func resetFilters() {
+		isFilteringForNewBuildings = false
+		searchText = ""
+		selectedCategory = ""
+		isAccessibleFilter = false
+		isFamilyFriendlyFilter = false
+		isShuttleFilter = false
+		isPublicWashroomsFilter = false
+		isFreeParkingFilter = false
+		isBikeParkingFilter = false
+		isPaidParkingFilter = false
+		isGuidedTourFilter = false
+		isOCTranspoNearbyFilter = false
+		isOpenSaturdayFilter = false
+		isOpenSundayFilter = false
+
+		filteredBuildings = applyFilters()
+	}
+
+	private func updateCategories() {
+		let allCategories = buildings.map { $0.category }
+		categories = Set(allCategories)
 	}
 
 	private func isFirstLaunch() -> Bool {
@@ -42,6 +138,7 @@ class BuildingsDataStore: ObservableObject {
 			return
 		}
 		parseAndSave(jsonData: data)
+		updateCategories() // Add this line to update categories
 	}
 
 	private func parseAndSave(jsonData: Data) {
@@ -65,10 +162,10 @@ class BuildingsDataStore: ObservableObject {
 
 	// When loading buildings and updating their favorites
 	private func updateFavorites(in _: inout [Building]) {
-//		guard let favoriteBuildingIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] else { return }
-//		for i in buildings.indices {
-//			buildings[i].isFavorite = favoriteBuildingIDs.contains(buildings[i].id)
-//		}
+		//        guard let favoriteBuildingIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] else { return }
+		//        for i in buildings.indices {
+		//            buildings[i].isFavorite = favoriteBuildingIDs.contains(buildings[i].id)
+		//        }
 	}
 
 	private func loadJsonFromLocalStorage() {
@@ -83,6 +180,24 @@ class BuildingsDataStore: ObservableObject {
 			print("Error: Couldn't load data from local storage")
 		}
 	}
+
+	func updateMapRegion() {
+		if !filteredBuildings.isEmpty {
+			let coordinates = filteredBuildings.map {
+				CLLocationCoordinate2D(latitude: $0.latitude, longitude: $0.longitude)
+			}
+
+			let maxLat = coordinates.map { $0.latitude }.max()!
+			let minLat = coordinates.map { $0.latitude }.min()!
+			let maxLon = coordinates.map { $0.longitude }.max()!
+			let minLon = coordinates.map { $0.longitude }.min()!
+
+			let center = CLLocationCoordinate2D(latitude: (maxLat + minLat) / 2, longitude: (maxLon + minLon) / 2)
+			let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.2, longitudeDelta: (maxLon - minLon) * 1.2)
+
+			mapRegion = MKCoordinateRegion(center: center, span: span)
+		}
+	}
 }
 
 class BuildingContainer: ObservableObject {
@@ -93,6 +208,42 @@ class BuildingContainer: ObservableObject {
 	}
 }
 
-#Preview {
-	ContentView()
+struct BuildingList: Codable {
+	var language: String
+	var version: Int
+	var year: Int
+	var buildings: [Building]
+}
+
+struct Building: Codable, Identifiable {
+	var id: Int { buildingId }
+	let categoryId: Int
+	let buildingId: Int
+	let name: String
+	let image: String
+	let website: String
+	let address: String
+	let category: String
+	let sundayStart: String
+	let sundayClose: String
+	let description: String
+	let saturdayStart: String
+	let saturdayClose: String
+	let imageDescription: String
+	let isNew: Bool
+	let isShuttle: Bool
+	let isGuidedTour: Bool
+	let isAccessible: Bool
+	let isOpenSunday: Bool
+	let isFreeParking: Bool
+	let isBikeParking: Bool
+	let isPaidParking: Bool
+	let isOpenSaturday: Bool
+	let isFamilyFriendly: Bool
+	let isPublicWashrooms: Bool
+	let isOCTranspoNearby: Bool
+	let latitude: Double
+	let longitude: Double
+
+	var isFavorite: Bool? = false
 }

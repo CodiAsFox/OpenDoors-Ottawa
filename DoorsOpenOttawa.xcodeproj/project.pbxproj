@@ -13,6 +13,8 @@
 		7321B3992B0FD8D000B6BB20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3982B0FD8D000B6BB20 /* Preview Assets.xcassets */; };
 		7321B3A72B0FDF9B00B6BB20 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */; };
 		7321B3A92B0FE01500B6BB20 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */; };
+		732E4E9A2B229F9800E897C1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E4E992B229F9800E897C1 /* MapView.swift */; };
+		73548AC32B1AC51C000D3049 /* BuildingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73548AC22B1AC51C000D3049 /* BuildingDetails.swift */; };
 		736E30ED2B150FD200845781 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E30EC2B150FD200845781 /* DataService.swift */; };
 		736E30EF2B15104E00845781 /* BuildingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E30EE2B15104E00845781 /* BuildingsModel.swift */; };
 		7394C6162B141AEA0016A37E /* BuildingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7394C6152B141AEA0016A37E /* BuildingsView.swift */; };
@@ -24,6 +26,7 @@
 		73CC70562B1529D300105798 /* team.json in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70552B1529D200105798 /* team.json */; };
 		73CC70582B15303A00105798 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 73CC70572B15303A00105798 /* Localizable.xcstrings */; };
 		73CC705A2B154FF100105798 /* LocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CC70592B154FF100105798 /* LocationHelper.swift */; };
+		73D0612F2B197DA200094836 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D0612E2B197DA200094836 /* ShareManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +37,13 @@
 		7321B3982B0FD8D000B6BB20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		732E4E992B229F9800E897C1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		73548AC22B1AC51C000D3049 /* BuildingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetails.swift; sourceTree = "<group>"; };
 		736E30EC2B150FD200845781 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		736E30EE2B15104E00845781 /* BuildingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsModel.swift; sourceTree = "<group>"; };
 		7394C6152B141AEA0016A37E /* BuildingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsView.swift; sourceTree = "<group>"; };
 		7394C6172B141B0C0016A37E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		73B531952B2402AE0051555C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		73CC704D2B15246A00105798 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		73CC704F2B15267B00105798 /* BuildingsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingsDataStore.swift; sourceTree = "<group>"; };
 		73CC70512B1529B600105798 /* buildings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = buildings.json; path = DoorsOpenOttawa/Assets.xcassets/Data/buildings.dataset/buildings.json; sourceTree = SOURCE_ROOT; };
@@ -45,6 +51,7 @@
 		73CC70552B1529D200105798 /* team.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = team.json; path = DoorsOpenOttawa/Assets.xcassets/Data/team.dataset/team.json; sourceTree = SOURCE_ROOT; };
 		73CC70572B15303A00105798 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		73CC70592B154FF100105798 /* LocationHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHelper.swift; sourceTree = "<group>"; };
+		73D0612E2B197DA200094836 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +70,7 @@
 			children = (
 				7321B38E2B0FD8CF00B6BB20 /* DoorsOpenOttawa */,
 				7321B38D2B0FD8CF00B6BB20 /* Products */,
+				73B531962B2402B80051555C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +85,7 @@
 		7321B38E2B0FD8CF00B6BB20 /* DoorsOpenOttawa */ = {
 			isa = PBXGroup;
 			children = (
+				73B531952B2402AE0051555C /* Info.plist */,
 				73CC704A2B151BF700105798 /* Model */,
 				7321B3A52B0FDEEE00B6BB20 /* Resources */,
 				7321B3A42B0FDED700B6BB20 /* Helpers */,
@@ -104,8 +113,10 @@
 			isa = PBXGroup;
 			children = (
 				7394C6172B141B0C0016A37E /* ContentView.swift */,
+				732E4E992B229F9800E897C1 /* MapView.swift */,
 				7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */,
 				7394C6152B141AEA0016A37E /* BuildingsView.swift */,
+				73548AC22B1AC51C000D3049 /* BuildingDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				73CC704D2B15246A00105798 /* DataController.swift */,
+				73D0612E2B197DA200094836 /* ShareManager.swift */,
 				73CC70592B154FF100105798 /* LocationHelper.swift */,
 			);
 			path = Helpers;
@@ -143,6 +155,13 @@
 				73CC70512B1529B600105798 /* buildings.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		73B531962B2402B80051555C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		73CC704A2B151BF700105798 /* Model */ = {
@@ -181,6 +200,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftUpdateCheck = 1500;
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
@@ -233,6 +255,9 @@
 				7394C6182B141B0C0016A37E /* ContentView.swift in Sources */,
 				736E30ED2B150FD200845781 /* DataService.swift in Sources */,
 				73CC70502B15267B00105798 /* BuildingsDataStore.swift in Sources */,
+				73D0612F2B197DA200094836 /* ShareManager.swift in Sources */,
+				732E4E9A2B229F9800E897C1 /* MapView.swift in Sources */,
+				73548AC32B1AC51C000D3049 /* BuildingDetails.swift in Sources */,
 				736E30EF2B15104E00845781 /* BuildingsModel.swift in Sources */,
 				73CC705A2B154FF100105798 /* LocationHelper.swift in Sources */,
 				73CC704E2B15246A00105798 /* DataController.swift in Sources */,
@@ -376,6 +401,7 @@
 				DEVELOPMENT_TEAM = 859UH84UXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoorsOpenOttawa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenDoors;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -411,6 +437,7 @@
 				DEVELOPMENT_TEAM = 859UH84UXS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DoorsOpenOttawa/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OpenDoors;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

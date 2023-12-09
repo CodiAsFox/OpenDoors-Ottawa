@@ -10,12 +10,10 @@ import SwiftUI
 
 @main
 struct DoorsOpenOttawaApp: App {
-	var modelContainer = BuildingsDataStore()
-
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
-				.environmentObject(modelContainer)
+				.environmentObject(BuildingsDataStore())
 		}
 	}
 }

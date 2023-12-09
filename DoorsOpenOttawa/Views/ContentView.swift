@@ -20,12 +20,10 @@ struct ContentView: View {
 				Label("Home", systemImage: "house")
 			}
 
-			NavigationView {
-				Map(viewModel: dataStore)
-			}
-			.tabItem {
-				Label("Map", systemImage: "map")
-			}
+			MapView(viewModel: dataStore)
+				.tabItem {
+					Label("Map", systemImage: "map")
+				}
 
 			NavigationView {
 				Saved(viewModel: dataStore)
@@ -34,7 +32,7 @@ struct ContentView: View {
 				Label("Saved", systemImage: "star.fill")
 			}
 
-			Settings() // Settings does not use the shared ViewModel
+			Settings()
 				.tabItem {
 					Label("More", systemImage: "ellipsis")
 				}
@@ -57,14 +55,6 @@ struct Saved: View {
 	}
 }
 
-struct Map: View {
-	@ObservedObject var viewModel: BuildingsDataStore
-
-	var body: some View {
-		Text("Map goes here!")
-	}
-}
-
 #Preview {
-ContentView()
+	ContentView()
 }
