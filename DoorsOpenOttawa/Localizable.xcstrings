@@ -4,6 +4,17 @@
     "00km away" : {
 
     },
+    "Academic Institutions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Établissements d’enseignement"
+          }
+        }
+      }
+    },
     "All Categories" : {
       "localizations" : {
         "fr-CA" : {
@@ -54,6 +65,17 @@
         }
       }
     },
+    "Business and/or Foundations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entreprises/Fondations"
+          }
+        }
+      }
+    },
     "Category" : {
 
     },
@@ -67,8 +89,22 @@
         }
       }
     },
+    "Community and/or Care centres" : {
+      "extractionState" : "manual"
+    },
     "Description" : {
 
+    },
+    "Embassies" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ambassades"
+          }
+        }
+      }
     },
     "Explore" : {
 
@@ -95,6 +131,20 @@
     "Filters" : {
 
     },
+    "Functional buildings" : {
+      "extractionState" : "manual"
+    },
+    "Galleries and Theatres" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galeries et théâtres"
+          }
+        }
+      }
+    },
     "Home" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -115,6 +165,9 @@
           }
         }
       }
+    },
+    "Key 1" : {
+      "extractionState" : "manual"
     },
     "Language" : {
       "localizations" : {
@@ -151,6 +204,17 @@
     },
     "No Results" : {
 
+    },
+    "Others" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autres"
+          }
+        }
+      }
     },
     "Reset Filters" : {
 

@@ -130,9 +130,9 @@ struct MapView: View {
 
 func colorForCategory(_ category: String) -> Color {
 	switch category {
-	case "Academic Institutions": return .yellow
-	case "Business and/or Foundations": return .blue
-	case "Community and/or Care centres": return .green
+	case t("Academic Institutions"): return .yellow
+	case t("Business and/or Foundations"): return .blue
+	case t("Community and/or Care centres"): return .green
 	case "Embassies": return .pink
 	case "Functional buildings": return .red
 	case "Galleries and Theatres": return .purple
@@ -148,7 +148,7 @@ func colorForCategory(_ category: String) -> Color {
 
 func iconForCategory(_ category: String) -> String {
 	switch category {
-	case "Academic Institutions": return "academic"
+	case t("Academic Institutions"): return "academic"
 	case "Business and/or Foundations": return "business"
 	case "Community and/or Care centres": return "community"
 	case "Embassies": return "embassy"

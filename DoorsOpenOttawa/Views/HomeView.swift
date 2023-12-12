@@ -39,7 +39,7 @@ struct HomeView: View {
 					.aspectRatio(contentMode: .fill)
 					.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
 
-				Text(t(for: "Buildings"))
+				Text(t("Buildings"))
 					.font(.largeTitle)
 					.fontWeight(.bold)
 					.foregroundColor(.white)

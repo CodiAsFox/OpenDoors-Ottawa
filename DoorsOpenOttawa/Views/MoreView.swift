@@ -26,7 +26,7 @@ struct MoreView: View {
 				.aspectRatio(contentMode: .fill)
 				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
 
-			Text("More")
+			Text(t("More"))
 				.font(.largeTitle)
 				.fontWeight(.bold)
 				.foregroundColor(Color.white)
@@ -39,7 +39,7 @@ struct MoreView: View {
 
 	var LanguageView: some View {
 		HStack {
-			Text(t(for: "language_toggle"))
+			Text(t("language_toggle"))
 				.font(.headline)
 				.fontWeight(.bold)
 				.foregroundColor(Color.black)

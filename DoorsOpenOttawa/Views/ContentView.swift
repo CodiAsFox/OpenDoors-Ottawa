@@ -18,24 +18,24 @@ struct ContentView: View {
 				HomeView()
 			}
 			.tabItem {
-				Label(t(for: "Home"), systemImage: "house")
+				Label(t( "Home"), systemImage: "house")
 			}
 
 			MapView()
 				.tabItem {
-					Label(t(for: "Map"), systemImage: "map")
+					Label(t("Map"), systemImage: "map")
 				}
 
 			NavigationView {
 				Saved()
 			}
 			.tabItem {
-				Label(t(for: "Saved"), systemImage: "star.fill")
+				Label(t("Saved"), systemImage: "star.fill")
 			}
 
 			MoreView()
 				.tabItem {
-					Label(t(for: "More"), systemImage: "ellipsis")
+					Label(t( "More"), systemImage: "ellipsis")
 				}
 		}
 		.tabViewStyle(.automatic)

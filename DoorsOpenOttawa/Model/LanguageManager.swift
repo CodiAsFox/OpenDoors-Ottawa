@@ -35,7 +35,7 @@ extension Notification.Name {
 	static let languageChanged = Notification.Name("languageChanged")
 }
 
-func t(for key: String) -> String {
+func t(_ key: String) -> String {
 	let languageManager = LanguageManager()
 	return languageManager.getLocalizedString(for: key)
 }
