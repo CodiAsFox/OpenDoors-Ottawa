@@ -40,8 +40,15 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 
 	override init() {
 		super.init()
+		setupLanguageChangeListener()
 		setupLocationManager()
 		loadBuildingsData()
+	}
+
+	private func setupLanguageChangeListener() {
+		NotificationCenter.default.addObserver(forName: .languageChanged, object: nil, queue: .main) { [weak self] _ in
+			self?.loadBuildingsData()
+		}
 	}
 
 	private func setupLocationManager() {
@@ -83,7 +90,7 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 		return filtered
 	}
 
-	private func loadBuildingsData() {
+	func loadBuildingsData() {
 		if isFirstLaunch() {
 			loadJsonFromAssets()
 		} else {
@@ -131,21 +138,26 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 	}
 
 	private func loadJsonFromAssets() {
+		var language = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en"
+
+		language = language == "fr-CA" ? "fr" : language
+
 		guard let url = Bundle.main.url(forResource: "buildings", withExtension: "json"),
 		      let data = try? Data(contentsOf: url)
 		else {
 			print("Error: Couldn't load data from assets")
 			return
 		}
-		parseAndSave(jsonData: data)
-		updateCategories() // Add this line to update categories
+		parseAndSave(jsonData: data, language: language)
+		updateCategories()
 	}
 
-	private func parseAndSave(jsonData: Data) {
+	private func parseAndSave(jsonData: Data, language: String) {
 		do {
 			let buildingList = try JSONDecoder().decode([BuildingList].self, from: jsonData)
-			buildings = buildingList.first { $0.language == "en" }?.buildings ?? []
+			buildings = buildingList.first { $0.language == language }?.buildings ?? []
 			saveToLocalStorage(jsonData: jsonData)
+			print("Success: Loaded data for language \(language) from assets")
 		} catch {
 			print("Error: Couldn't parse JSON data - \(error)")
 		}
@@ -206,44 +218,4 @@ class BuildingContainer: ObservableObject {
 	init(building: Building) {
 		self.building = building
 	}
-}
-
-struct BuildingList: Codable {
-	var language: String
-	var version: Int
-	var year: Int
-	var buildings: [Building]
-}
-
-struct Building: Codable, Identifiable {
-	var id: Int { buildingId }
-	let categoryId: Int
-	let buildingId: Int
-	let name: String
-	let image: String
-	let website: String
-	let address: String
-	let category: String
-	let sundayStart: String
-	let sundayClose: String
-	let description: String
-	let saturdayStart: String
-	let saturdayClose: String
-	let imageDescription: String
-	let isNew: Bool
-	let isShuttle: Bool
-	let isGuidedTour: Bool
-	let isAccessible: Bool
-	let isOpenSunday: Bool
-	let isFreeParking: Bool
-	let isBikeParking: Bool
-	let isPaidParking: Bool
-	let isOpenSaturday: Bool
-	let isFamilyFriendly: Bool
-	let isPublicWashrooms: Bool
-	let isOCTranspoNearby: Bool
-	let latitude: Double
-	let longitude: Double
-
-	var isFavorite: Bool? = false
 }

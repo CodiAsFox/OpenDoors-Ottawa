@@ -5,9 +5,11 @@
 //  Created by Tay on 2023-11-26.
 //
 
+import MapKit
 import SwiftUI
 
 struct BuildingsView: View {
+	@EnvironmentObject var lang: LanguageManager
 	var building: Building
 	@Binding var selectedBuilding: Building?
 
@@ -22,7 +24,7 @@ struct BuildingsView: View {
 				}
 			}
 			.navigationBarTitle("Building Details", displayMode: .inline)
-			.navigationBarItems(trailing: Button("Close") {
+			.navigationBarItems(leading: NewBuildingIndicator, trailing: Button("Close") {
 				self.selectedBuilding = nil
 			})
 		}
@@ -39,9 +41,10 @@ struct BuildingsView: View {
 	}
 
 	private var BuildingInfoView: some View {
-		HStack {
-//			ActionButtonsView
+		VStack {
 			BuildingDetailsView
+			BuildingMap
+			ActionButtonsView
 		}
 		.padding(.horizontal, 15)
 		.padding(.vertical, 10)
@@ -51,33 +54,34 @@ struct BuildingsView: View {
 		HStack {
 			FavoriteButton
 			ShareButton
-			NewBuildingIndicator
 		}
 	}
 
 	private var FavoriteButton: some View {
 		Button(role: .none) {} label: {
 			Image(systemName: "heart")
+			Text("Favorite")
 		}
 		.buttonStyle(.bordered)
-		.accessibilityLabel("Favorite")
 	}
 
 	private var ShareButton: some View {
 		Button(action: share) {
 			Image(systemName: "square.and.arrow.up")
+			Text("Share")
 		}
 		.buttonStyle(.bordered)
-		.accessibilityLabel("Share")
 	}
 
 	private var NewBuildingIndicator: some View {
 		Group {
 			if building.isNew {
-				Image("newBuilding")
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-					.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
+				HStack {
+					Image("newBuilding")
+						.resizable(capInsets: EdgeInsets())
+						.aspectRatio(contentMode: .fill).padding(2)
+						.frame(width: 35, height: 35).background(.white).cornerRadius(35)
+				}.frame(width: 45, height: 45).background(Color("Topbar")).cornerRadius(35)
 			}
 		}
 	}
@@ -107,8 +111,30 @@ struct BuildingsView: View {
 						.fontWeight(.bold)
 						.padding(.vertical, 10)
 						.font(.system(.body, design: .default))
-					Text(building.category)
-						.font(.system(.body, design: .default))
+					HStack {
+						VStack(alignment: .center) {
+							Image(iconForCategory(building.category))
+								.resizable()
+								.aspectRatio(contentMode: .fill)
+								.frame(width: 30, height: 30)
+								.clipShape(Circle())
+						}
+						.background {
+							Circle()
+								.fill(Color("MapIcon"))
+								.stroke(Color("MapIcon"), lineWidth: 1)
+						}
+						.frame(width: 35, height: 35)
+						.overlay(
+							Circle()
+								.stroke(
+									colorForCategory(building.category),
+									lineWidth: 2
+								)
+						)
+						Text(building.category)
+							.font(.system(.body, design: .default))
+					}
 				}
 
 				Label("Description", systemImage: "text.justify")
@@ -123,40 +149,86 @@ struct BuildingsView: View {
 					.padding(.vertical, 10)
 					.font(.system(.body, design: .default))
 
-				if building.isShuttle {
-					FeatureView(imageName: "shuttle", text: "Shuttle")
-				}
-				if building.isGuidedTour {
-					FeatureView(imageName: "guidedTour", text: "Guided Tour")
-				}
-				if building.isAccessible {
-					FeatureView(imageName: "accessibility", text: "Accessible")
-				}
-				if building.isOpenSunday {
-					FeatureView(imageName: "sunday", text: "Opened Sundays")
-				}
-				if building.isFreeParking {
-					FeatureView(imageName: "freeParking", text: "Free Parking")
-				}
-				if building.isBikeParking {
-					FeatureView(imageName: "bikeracks", text: "Bike Rack")
-				}
-				if building.isPaidParking {
-					FeatureView(imageName: "paidParking", text: "Paid Parking")
-				}
-				if building.isOpenSaturday {
-					FeatureView(imageName: "satuday", text: "Open Saturdays")
-				}
-				if building.isFamilyFriendly {
-					FeatureView(imageName: "familyFriendly", text: "Family Friendly")
-				}
-				if building.isPublicWashrooms {
-					FeatureView(imageName: "washroom", text: "Public Washrooms")
-				}
-				if building.isOCTranspoNearby {
-					FeatureView(imageName: "ocTranspo", text: "OC Transpo Nearby")
+				LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: 16) {
+					if building.isShuttle {
+						FeatureView(imageName: "shuttle", text: "Shuttle")
+					}
+					if building.isGuidedTour {
+						FeatureView(imageName: "guidedTour", text: "Guided Tour")
+					}
+					if building.isAccessible {
+						FeatureView(imageName: "accessibility", text: "Accessible")
+					}
+					if building.isOpenSunday {
+						FeatureView(imageName: "sunday", text: "Opened Sundays")
+					}
+					if building.isFreeParking {
+						FeatureView(imageName: "freeParking", text: "Free Parking")
+					}
+					if building.isBikeParking {
+						FeatureView(imageName: "bikeracks", text: "Bike Rack")
+					}
+					if building.isPaidParking {
+						FeatureView(imageName: "paidParking", text: "Paid Parking")
+					}
+					if building.isOpenSaturday {
+						FeatureView(imageName: "saturday", text: "Open Saturdays")
+					}
+					if building.isFamilyFriendly {
+						FeatureView(imageName: "familyFriendly", text: "Family Friendly")
+					}
+					if building.isPublicWashrooms {
+						FeatureView(imageName: "washroom", text: "Public Washrooms")
+					}
+					if building.isOCTranspoNearby {
+						FeatureView(imageName: "ocTranspo", text: "OC Transpo Nearby")
+					}
 				}
 			}
+		}
+	}
+
+	private var BuildingMap: some View {
+		VStack(alignment: .leading) {
+			Label("Map", systemImage: "map")
+				.fontWeight(.bold)
+				.padding(.vertical, 10)
+				.font(.system(.body, design: .default))
+			Map {
+				Annotation("", coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)) {
+					Button(action: {
+						withAnimation {
+							self.selectedBuilding = building
+						}
+					}) {
+						Image(iconForCategory(building.category))
+							.resizable()
+							.aspectRatio(contentMode: .fill)
+							.frame(width: 35, height: 35)
+							.clipShape(Circle())
+							.overlay(
+								Circle()
+
+									.stroke(
+										selectedBuilding == nil
+											? colorForCategory(building.category)
+											: (building == selectedBuilding
+												? colorForCategory(building.category)
+												: Color.gray),
+										lineWidth: 4
+									)
+							)
+					}
+				}.tint(colorForCategory(building.category))
+			}
+		}
+		.frame(height: 300)
+		.padding(.top, selectedBuilding != nil ? 0 : 0)
+		.animation(.easeInOut, value: selectedBuilding != nil)
+		.mapControls {
+			MapUserLocationButton()
+			MapCompass()
+			MapScaleView()
 		}
 	}
 
@@ -183,13 +255,19 @@ struct FeatureView: View {
 	var text: String
 
 	var body: some View {
-		VStack {
-			Image(imageName).resizable()
-				.aspectRatio(contentMode: .fill)
-				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
+		VStack(alignment: .center) {
+			Image(imageName)
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(maxWidth: 35, maxHeight: 30, alignment: .center)
+			Spacer()
+
 			Text(text)
-				.font(.system(.body, design: .default))
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+				.font(.system(.body, design: .default)).multilineTextAlignment(.center)
 		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+		.padding()
 	}
 }
 

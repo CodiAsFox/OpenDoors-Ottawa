@@ -9,46 +9,42 @@ import CoreData
 import SwiftUI
 
 struct ContentView: View {
-	@StateObject var dataStore = BuildingsDataStore()
+	@EnvironmentObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var lang: LanguageManager
 
 	var body: some View {
 		TabView {
 			NavigationView {
-				HomeView(viewModel: dataStore)
+				HomeView()
 			}
 			.tabItem {
-				Label("Home", systemImage: "house")
+				Label(t(for: "Home"), systemImage: "house")
 			}
 
-			MapView(viewModel: dataStore)
+			MapView()
 				.tabItem {
-					Label("Map", systemImage: "map")
+					Label(t(for: "Map"), systemImage: "map")
 				}
 
 			NavigationView {
-				Saved(viewModel: dataStore)
+				Saved()
 			}
 			.tabItem {
-				Label("Saved", systemImage: "star.fill")
+				Label(t(for: "Saved"), systemImage: "star.fill")
 			}
 
-			Settings()
+			MoreView()
 				.tabItem {
-					Label("More", systemImage: "ellipsis")
+					Label(t(for: "More"), systemImage: "ellipsis")
 				}
 		}
 		.tabViewStyle(.automatic)
 	}
 }
 
-struct Settings: View {
-	var body: some View {
-		Text("Settings Crap!")
-	}
-}
-
 struct Saved: View {
-	@ObservedObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var lang: LanguageManager
 
 	var body: some View {
 		Text("Saved crap!")

@@ -10,7 +10,8 @@ import SwiftUI
 import UIKit
 
 struct HomeView: View {
-	@ObservedObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var lang: LanguageManager
 	@State private var selectedBuilding: Building?
 	@State private var isSheetPresented = false
 	@State private var isSearchVisible = false
@@ -25,6 +26,9 @@ struct HomeView: View {
 		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
 		.sheet(item: $selectedBuilding, content: BuildingDetailSheet)
 		.sheet(isPresented: $isSheetPresented, content: FilterOptionsSheet)
+		.onReceive(NotificationCenter.default.publisher(for: .languageChanged)) { _ in
+			viewModel.loadBuildingsData()
+		}
 	}
 
 	private var HeaderView: some View {
@@ -35,7 +39,7 @@ struct HomeView: View {
 					.aspectRatio(contentMode: .fill)
 					.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
 
-				Text("Buildings")
+				Text(t(for: "Buildings"))
 					.font(.largeTitle)
 					.fontWeight(.bold)
 					.foregroundColor(.white)
@@ -121,7 +125,6 @@ struct HomeView: View {
 								self.selectedBuilding = building
 							}
 					}
-					.padding()
 				}
 			}
 		}
@@ -149,17 +152,39 @@ struct HomeView: View {
 				.pickerStyle(.menu)
 
 				Section(header: Text("Filters")) {
-					Toggle("Shuttle", isOn: $viewModel.isShuttleFilter)
-					Toggle("Public Washrooms", isOn: $viewModel.isPublicWashroomsFilter)
-					Toggle("Accessible", isOn: $viewModel.isAccessibleFilter)
-					Toggle("Family Friendly", isOn: $viewModel.isFamilyFriendlyFilter)
-					Toggle("Free Parking", isOn: $viewModel.isFreeParkingFilter)
-					Toggle("Bike Parking", isOn: $viewModel.isBikeParkingFilter)
-					Toggle("Paid Parking", isOn: $viewModel.isPaidParkingFilter)
-					Toggle("Guided Tour", isOn: $viewModel.isGuidedTourFilter)
-					Toggle("OC Transpo Nearby", isOn: $viewModel.isOCTranspoNearbyFilter)
-					Toggle("Open on Saturdays", isOn: $viewModel.isOpenSaturdayFilter)
-					Toggle("Open on Sundays", isOn: $viewModel.isOpenSundayFilter)
+					Toggle(isOn: $viewModel.isShuttleFilter) {
+						CategoryView(imageName: "shuttle", text: "Shuttle")
+					}
+					Toggle(isOn: $viewModel.isPublicWashroomsFilter) {
+						CategoryView(imageName: "washroom", text: "Public Washrooms")
+					}
+					Toggle(isOn: $viewModel.isAccessibleFilter) {
+						CategoryView(imageName: "accessibility", text: "Accessible")
+					}
+					Toggle(isOn: $viewModel.isFamilyFriendlyFilter) {
+						CategoryView(imageName: "familyFriendly", text: "Family Friendly")
+					}
+					Toggle(isOn: $viewModel.isFreeParkingFilter) {
+						CategoryView(imageName: "freeParking", text: "Free Parking")
+					}
+					Toggle(isOn: $viewModel.isBikeParkingFilter) {
+						CategoryView(imageName: "bikeracks", text: "Bike Rack")
+					}
+					Toggle(isOn: $viewModel.isPaidParkingFilter) {
+						CategoryView(imageName: "paidParking", text: "Paid Parking")
+					}
+					Toggle(isOn: $viewModel.isGuidedTourFilter) {
+						CategoryView(imageName: "guidedTour", text: "Guided Tour")
+					}
+					Toggle(isOn: $viewModel.isOCTranspoNearbyFilter) {
+						CategoryView(imageName: "ocTranspo", text: "OC Transpo Nearby")
+					}
+					Toggle(isOn: $viewModel.isOpenSaturdayFilter) {
+						CategoryView(imageName: "saturday", text: "Open Saturdays")
+					}
+					Toggle(isOn: $viewModel.isOpenSundayFilter) {
+						CategoryView(imageName: "sunday", text: "Opened Sundays")
+					}
 				}
 
 				Button(action: {
@@ -195,6 +220,23 @@ struct BuildingDetailView: View {
 
 	var body: some View {
 		Text(building.name) // Example
+	}
+}
+
+struct CategoryView: View {
+	var imageName: String
+	var text: String
+
+	var body: some View {
+		HStack(alignment: .center) {
+			Image(imageName)
+				.resizable()
+				.aspectRatio(contentMode: .fit)
+				.frame(maxWidth: 35, maxHeight: 30, alignment: .center)
+
+			Text(text)
+				.font(.system(.body, design: .default))
+		}
 	}
 }
 

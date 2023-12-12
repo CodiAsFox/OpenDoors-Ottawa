@@ -14,6 +14,7 @@ struct DoorsOpenOttawaApp: App {
 		WindowGroup {
 			ContentView()
 				.environmentObject(BuildingsDataStore())
+				.environmentObject(LanguageManager())
 		}
 	}
 }

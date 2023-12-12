@@ -8,11 +8,50 @@
 import SwiftUI
 
 struct MoreView: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+	@State private var languageChanged: Bool = false
+	@EnvironmentObject var lang: LanguageManager
+
+	var body: some View {
+		VStack(alignment: .leading) {
+			HeaderView
+			LanguageView
+		}
+		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+	}
+
+	var HeaderView: some View {
+		HStack {
+			Image("logo")
+				.resizable()
+				.aspectRatio(contentMode: .fill)
+				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
+
+			Text("More")
+				.font(.largeTitle)
+				.fontWeight(.bold)
+				.foregroundColor(Color.white)
+			Spacer()
+		}
+		.padding()
+		.frame(maxWidth: .infinity)
+		.background(Color("Topbar"))
+	}
+
+	var LanguageView: some View {
+		HStack {
+			Text(t(for: "language_toggle"))
+				.font(.headline)
+				.fontWeight(.bold)
+				.foregroundColor(Color.black)
+
+			Spacer()
+
+			SelectLanguageView(languageChanged: $languageChanged)
+
+		}.padding()
+	}
 }
 
 #Preview {
-    MoreView()
+	ContentView()
 }

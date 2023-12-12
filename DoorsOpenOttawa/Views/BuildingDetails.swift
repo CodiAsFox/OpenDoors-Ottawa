@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct BuildingDetails: View {
+	@EnvironmentObject var lang: LanguageManager
 	@ObservedObject var buildingContainer: BuildingContainer
 	@State private var showingShareSheet = false
+	
 
 	private var building: Building {
 		buildingContainer.building
@@ -17,11 +19,15 @@ struct BuildingDetails: View {
 
 	var body: some View {
 		VStack {
-			BuildingImageView
+			ZStack(alignment: .topTrailing) {
+				BuildingImageView.padding(3)
+				NewBuildingIndicator
+			}
 			BuildingInfoView
 		}
+		.padding(0)
 		.background(Color("boxBG"))
-		.cornerRadius(15)
+//		Divider()
 	}
 
 	private var BuildingImageView: some View {
@@ -46,9 +52,29 @@ struct BuildingDetails: View {
 	private var ActionButtonsView: some View {
 		HStack {
 			FavoriteButton
+
 			ShareButton
 			Spacer()
-			NewBuildingIndicator
+			VStack(alignment: .center) {
+				Image(iconForCategory(building.category))
+					.resizable()
+					.aspectRatio(contentMode: .fill)
+					.frame(width: 30, height: 30)
+					.clipShape(Circle())
+			}
+			.background {
+				Circle()
+					.fill(Color("MapIcon"))
+					.stroke(Color("MapIcon"), lineWidth: 1)
+			}
+			.frame(width: 35, height: 35)
+			.overlay(
+				Circle()
+					.stroke(
+						colorForCategory(building.category),
+						lineWidth: 2
+					)
+			)
 		}
 	}
 
@@ -71,10 +97,12 @@ struct BuildingDetails: View {
 	private var NewBuildingIndicator: some View {
 		Group {
 			if building.isNew {
-				Image("newBuilding")
-					.resizable()
-					.aspectRatio(contentMode: .fill)
-					.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
+				HStack {
+					Image("newBuilding")
+						.resizable(capInsets: EdgeInsets())
+						.aspectRatio(contentMode: .fill).padding(2)
+						.frame(width: 35, height: 35).background(.white).cornerRadius(35)
+				}.frame(width: 45, height: 45).background(Color("Topbar")).cornerRadius(35)
 			}
 		}
 	}
@@ -88,13 +116,11 @@ struct BuildingDetails: View {
 			HStack {
 				Text(building.address)
 					.font(.system(.caption, design: .default))
-					.foregroundColor(Color.black)
 
 				Spacer()
 
 				Text("00km away") // Placeholder for distance calculation
 					.font(.system(.caption, design: .default))
-					.foregroundColor(Color.black)
 			}
 		}
 	}
