@@ -1,8 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "00km away" : {
-
+    "%.2f km away" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À %.2f km"
+          }
+        }
+      }
     },
     "Academic Institutions" : {
       "extractionState" : "manual",
@@ -15,20 +23,63 @@
         }
       }
     },
-    "All Categories" : {
+    "Accessible" : {
+      "extractionState" : "manual",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "toutes catégories"
+            "value" : "Accessible"
+          }
+        }
+      }
+    },
+    "All Categories" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toutes catégories"
           }
         }
       }
     },
     "Apply Filters" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appliquer des filtres"
+          }
+        }
+      }
+    },
+    "author_bio" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Did you know I wrote a TV show that I'd try to pitch to networks?\n\nIt's true, and it's just as crazy as I am. I've finally put my silly humour and quirky imagination into good use."
+          }
+        }
+      }
+    },
+    "Bike Rack" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Porte-vélos"
+          }
+        }
+      }
     },
     "Building Details" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -39,6 +90,7 @@
       }
     },
     "Building name" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -77,9 +129,18 @@
       }
     },
     "Category" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Catégorie"
+          }
+        }
+      }
     },
     "Close" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -90,10 +151,26 @@
       }
     },
     "Community and/or Care centres" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Centres communautaires/de soins"
+          }
+        }
+      }
     },
     "Description" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description"
+          }
+        }
+      }
     },
     "Embassies" : {
       "extractionState" : "manual",
@@ -107,15 +184,50 @@
       }
     },
     "Explore" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorer"
+          }
+        }
+      }
+    },
+    "Family Friendly" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conviviale et familiale"
+          }
+        }
+      }
     },
     "Favorite" : {
-
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoris"
+          }
+        }
+      }
     },
     "Features" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caractéristiques"
+          }
+        }
+      }
     },
     "Filter" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -126,13 +238,48 @@
       }
     },
     "Filter Options" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options de filtrage"
+          }
+        }
+      }
     },
     "Filters" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtres"
+          }
+        }
+      }
+    },
+    "Free Parking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parking gratuit"
+          }
+        }
+      }
     },
     "Functional buildings" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Édifices techniques"
+          }
+        }
+      }
     },
     "Galleries and Theatres" : {
       "extractionState" : "manual",
@@ -141,6 +288,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Galeries et théâtres"
+          }
+        }
+      }
+    },
+    "Government buildings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Édifices gouvernementaux"
+          }
+        }
+      }
+    },
+    "Guided Tour" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visite guidée"
           }
         }
       }
@@ -166,9 +335,6 @@
         }
       }
     },
-    "Key 1" : {
-      "extractionState" : "manual"
-    },
     "Language" : {
       "localizations" : {
         "fr-CA" : {
@@ -179,7 +345,7 @@
         }
       }
     },
-    "language_toggle" : {
+    "Language/Langue" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -197,13 +363,92 @@
       }
     },
     "Map" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carte"
+          }
+        }
+      }
     },
     "More" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plus"
+          }
+        }
+      }
+    },
+    "Museums, Archives and Historic Sites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Musées, archives et lieux historiques"
+          }
+        }
+      }
     },
     "No Results" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun résultat"
+          }
+        }
+      }
+    },
+    "OC Transpo Nearby" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À proximité d'OC Transpo"
+          }
+        }
+      }
+    },
+    "Open Saturdays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvert le samedi"
+          }
+        }
+      }
+    },
+    "Opened Sundays" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvert le dimanche"
+          }
+        }
+      }
+    },
+    "Other" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autres"
+          }
+        }
+      }
     },
     "Others" : {
       "extractionState" : "manual",
@@ -216,23 +461,125 @@
         }
       }
     },
+    "Paid Parking" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stationnement payant"
+          }
+        }
+      }
+    },
+    "Public Washrooms" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toilettes publiques"
+          }
+        }
+      }
+    },
+    "Religious buildings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Édifices religieux"
+          }
+        }
+      }
+    },
     "Reset Filters" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser les filtres"
+          }
+        }
+      }
     },
     "Saved" : {
-      "extractionState" : "manual"
-    },
-    "Saved crap!" : {
-
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enregistré"
+          }
+        }
+      }
     },
     "Search" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recherche"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paramètres"
+          }
+        }
+      }
     },
     "Share" : {
-
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partager"
+          }
+        }
+      }
+    },
+    "Shuttle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navette"
+          }
+        }
+      }
+    },
+    "Sports and Leisure buildings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Édifices de sports et loisirs"
+          }
+        }
+      }
     },
     "View more" : {
-
+      "extractionState" : "stale",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voir plus"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

@@ -22,7 +22,7 @@ struct MapView: View {
 					Button(action: {
 						sheetBuilding = selectedBuilding
 					}) {
-						Label("View more", systemImage: "chevron.up")
+						Label(t("View more"), systemImage: "chevron.up")
 							.labelStyle(.titleAndIcon)
 							.padding(.top, 10)
 							.padding(.bottom, 5)
@@ -105,7 +105,7 @@ struct MapView: View {
 				.aspectRatio(contentMode: .fill)
 				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
 
-			Text("Explore")
+			Text(t("Explore"))
 				.font(.largeTitle)
 				.fontWeight(.bold)
 				.foregroundColor(Color.white)
@@ -113,9 +113,8 @@ struct MapView: View {
 			if self.selectedBuilding != nil {
 				Button(action: {
 					self.selectedBuilding = nil
-					print("Close button tapped")
 				}) {
-					Text("Close")
+					Text(t("Close"))
 						.font(.headline)
 						.fontWeight(.bold)
 						.foregroundColor(.white)
@@ -123,7 +122,6 @@ struct MapView: View {
 			}
 		}
 		.padding()
-		.frame(minWidth: 0, maxWidth: .infinity)
 		.background(Color("Topbar"))
 	}
 }
@@ -133,14 +131,14 @@ func colorForCategory(_ category: String) -> Color {
 	case t("Academic Institutions"): return .yellow
 	case t("Business and/or Foundations"): return .blue
 	case t("Community and/or Care centres"): return .green
-	case "Embassies": return .pink
-	case "Functional buildings": return .red
-	case "Galleries and Theatres": return .purple
-	case "Government buildings": return .mint
-	case "Museums, Archives and Historic Sites": return .orange
-	case "Other": return .teal
-	case "Religious buildings": return .brown
-	case "Sports and Leisure buildings": return .black
+	case t("Embassies"): return .pink
+	case t("Functional buildings"): return .red
+	case t("Galleries and Theatres"): return .purple
+	case t("Government buildings"): return .mint
+	case t("Museums, Archives and Historic Sites"): return .orange
+	case t("Other"): return .teal
+	case t("Religious buildings"): return .brown
+	case t("Sports and Leisure buildings"): return .black
 	default: print("Error: Unknown category: \(category)")
 		return .gray
 	}
@@ -149,21 +147,24 @@ func colorForCategory(_ category: String) -> Color {
 func iconForCategory(_ category: String) -> String {
 	switch category {
 	case t("Academic Institutions"): return "academic"
-	case "Business and/or Foundations": return "business"
-	case "Community and/or Care centres": return "community"
-	case "Embassies": return "embassy"
-	case "Functional buildings": return "utilities"
-	case "Galleries and Theatres": return "theatre"
-	case "Government buildings": return "government"
-	case "Museums, Archives and Historic Sites": return "museum"
-	case "Other": return "other"
-	case "Religious buildings": return "religious"
-	case "Sports and Leisure buildings": return "sports"
+	case t("Business and/or Foundations"): return "business"
+	case t("Community and/or Care centres"): return "community"
+	case t("Embassies"): return "embassy"
+	case t("Functional buildings"): return "utilities"
+	case t("Galleries and Theatres"): return "theatre"
+	case t("Government buildings"): return "government"
+	case t("Museums, Archives and Historic Sites"): return "museum"
+	case t("Other"): return "other"
+	case t("Religious buildings"): return "religious"
+	case t("Sports and Leisure buildings"): return "sports"
 
-	default: return "other"
+	default: print("Error: Unknown category: \(category)")
+		return "other"
 	}
 }
 
 #Preview {
 	ContentView()
+		.environmentObject(BuildingsDataStore())
+		.environmentObject(LanguageManager())
 }

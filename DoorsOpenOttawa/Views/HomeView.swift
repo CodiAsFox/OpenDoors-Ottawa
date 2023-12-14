@@ -47,7 +47,6 @@ struct HomeView: View {
 
 				SearchAndFilterButtons
 			}
-			.frame(minWidth: 0, maxWidth: .infinity)
 			.padding()
 		}
 		.background(Color("Topbar"))
@@ -63,7 +62,7 @@ struct HomeView: View {
 					.foregroundColor(.white)
 					.frame(maxWidth: 18, maxHeight: 18, alignment: .center)
 			}
-			.accessibilityLabel(isSearchVisible ? "Close" : "Search")
+			.accessibilityLabel(isSearchVisible ? t("Close") : t("Search"))
 			.padding(.trailing, 15)
 
 			Button {
@@ -74,7 +73,7 @@ struct HomeView: View {
 					.aspectRatio(contentMode: .fill)
 					.frame(maxWidth: 20, maxHeight: 10, alignment: .center)
 			}
-			.accessibilityLabel("Filter")
+			.accessibilityLabel(t("Filter"))
 		}
 	}
 
@@ -83,7 +82,7 @@ struct HomeView: View {
 			if isSearchVisible {
 				VStack(alignment: .leading) {
 					HStack {
-						TextField("Building name", text: $viewModel.searchText)
+						TextField(t("Building name"), text: $viewModel.searchText)
 							.padding(7)
 							.background(Color(.systemGray6))
 							.foregroundColor(.black)
@@ -93,7 +92,7 @@ struct HomeView: View {
 						Button(action: {
 							isSearching = true
 						}) {
-							Text("Search")
+							Text(t("Search"))
 								.fontWeight(.bold)
 								.foregroundColor(.white)
 						}
@@ -112,7 +111,7 @@ struct HomeView: View {
 	private var BuildingsListView: some View {
 		Group {
 			if viewModel.filteredBuildings.isEmpty && (isSearching || filtersAreApplied()) {
-				Text("No Results")
+				Text(t("No Results"))
 					.font(.title)
 					.fontWeight(.bold)
 					.foregroundColor(.red)
@@ -143,15 +142,15 @@ struct HomeView: View {
 	private func FilterOptionsSheet() -> some View {
 		NavigationView {
 			Form {
-				Picker("Category", selection: $viewModel.selectedCategory) {
-					Text("All Categories").tag("")
+				Picker(t("Category"), selection: $viewModel.selectedCategory) {
+					Text(t("All Categories")).tag("")
 					ForEach(viewModel.categories.sorted(), id: \.self) { category in
 						Text(category).tag(category)
 					}
 				}
 				.pickerStyle(.menu)
 
-				Section(header: Text("Filters")) {
+				Section(header: Text(t("Filters"))) {
 					Toggle(isOn: $viewModel.isShuttleFilter) {
 						CategoryView(imageName: "shuttle", text: "Shuttle")
 					}
@@ -192,7 +191,7 @@ struct HomeView: View {
 					isSearchVisible = false
 					viewModel.filterBuildings()
 				}) {
-					Text("Apply Filters")
+					Text(t("Apply Filters"))
 				}
 
 				Button(role: .destructive, action: {
@@ -200,11 +199,11 @@ struct HomeView: View {
 					isSearchVisible = false
 					viewModel.resetFilters()
 				}) {
-					Text("Reset Filters")
+					Text(t("Reset Filters"))
 				}
 			}
-			.navigationBarTitle("Filter Options")
-			.navigationBarItems(trailing: Button("Close") {
+			.navigationBarTitle(t("Filter Options"))
+			.navigationBarItems(trailing: Button(t("Close")) {
 				isSheetPresented = false
 			})
 		}
@@ -212,14 +211,6 @@ struct HomeView: View {
 
 	private func filtersAreApplied() -> Bool {
 		return viewModel.isShuttleFilter || viewModel.isPublicWashroomsFilter
-	}
-}
-
-struct BuildingDetailView: View {
-	var building: Building
-
-	var body: some View {
-		Text(building.name) // Example
 	}
 }
 
@@ -233,8 +224,9 @@ struct CategoryView: View {
 				.resizable()
 				.aspectRatio(contentMode: .fit)
 				.frame(maxWidth: 35, maxHeight: 30, alignment: .center)
+				.accessibility(hidden: true)
 
-			Text(text)
+			Text(t(text))
 				.font(.system(.body, design: .default))
 		}
 	}
@@ -242,4 +234,6 @@ struct CategoryView: View {
 
 #Preview {
 	ContentView()
+		.environmentObject(BuildingsDataStore())
+		.environmentObject(LanguageManager())
 }

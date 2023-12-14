@@ -13,7 +13,7 @@ import SwiftUI
 class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate {
 	@Published var buildings: [Building] = []
 	@Published var categories: Set<String> = []
-
+	@Published var userLocation: CLLocation?
 	@Published var isFilteringForNewBuildings = false
 	@Published var searchText = ""
 	@Published var selectedCategory: String = ""
@@ -58,12 +58,21 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 		locationManager?.requestWhenInUseAuthorization()
 		locationManager?.startUpdatingLocation()
 	}
+	
+	func distanceFromUser(to building: Building) -> CLLocationDistance? {
+		guard let userLocation = userLocation else { return nil }
+		let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
+		return userLocation.distance(from: buildingLocation) / 1000 // Distance in kilometers
+	}
+
 
 	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		if let location = locations.last {
+			userLocation = location
 			updateMapRegion(with: location.coordinate)
 		}
 	}
+
 
 	func updateMapRegion(with coordinate: CLLocationCoordinate2D) {
 		let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)

@@ -18,7 +18,7 @@ struct ContentView: View {
 				HomeView()
 			}
 			.tabItem {
-				Label(t( "Home"), systemImage: "house")
+				Label(t("Home"), systemImage: "house")
 			}
 
 			MapView()
@@ -27,7 +27,7 @@ struct ContentView: View {
 				}
 
 			NavigationView {
-				Saved()
+				SavedView()
 			}
 			.tabItem {
 				Label(t("Saved"), systemImage: "star.fill")
@@ -35,22 +35,15 @@ struct ContentView: View {
 
 			MoreView()
 				.tabItem {
-					Label(t( "More"), systemImage: "ellipsis")
+					Label(t("More"), systemImage: "ellipsis")
 				}
 		}
 		.tabViewStyle(.automatic)
 	}
 }
 
-struct Saved: View {
-	@EnvironmentObject var viewModel: BuildingsDataStore
-	@EnvironmentObject var lang: LanguageManager
-
-	var body: some View {
-		Text("Saved crap!")
-	}
-}
-
 #Preview {
 	ContentView()
+		.environmentObject(BuildingsDataStore())
+		.environmentObject(LanguageManager())
 }

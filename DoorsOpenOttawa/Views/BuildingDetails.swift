@@ -9,9 +9,9 @@ import SwiftUI
 
 struct BuildingDetails: View {
 	@EnvironmentObject var lang: LanguageManager
+	@EnvironmentObject var dataStore: BuildingsDataStore
 	@ObservedObject var buildingContainer: BuildingContainer
 	@State private var showingShareSheet = false
-	
 
 	private var building: Building {
 		buildingContainer.building
@@ -27,7 +27,6 @@ struct BuildingDetails: View {
 		}
 		.padding(0)
 		.background(Color("boxBG"))
-//		Divider()
 	}
 
 	private var BuildingImageView: some View {
@@ -104,7 +103,7 @@ struct BuildingDetails: View {
 						.frame(width: 35, height: 35).background(.white).cornerRadius(35)
 				}.frame(width: 45, height: 45).background(Color("Topbar")).cornerRadius(35)
 			}
-		}
+		}.padding(.top, 3).padding(.trailing, 3)
 	}
 
 	private var BuildingDetailsView: some View {
@@ -119,8 +118,10 @@ struct BuildingDetails: View {
 
 				Spacer()
 
-				Text("00km away") // Placeholder for distance calculation
-					.font(.system(.caption, design: .default))
+				if let distance = dataStore.distanceFromUser(to: building) {
+					Text(String(format: t("%.2f km away"), distance))
+						.font(.system(.caption, design: .default))
+				}
 			}
 		}
 	}
@@ -145,4 +146,6 @@ struct BuildingDetails: View {
 
 #Preview {
 	ContentView()
+		.environmentObject(BuildingsDataStore())
+		.environmentObject(LanguageManager())
 }

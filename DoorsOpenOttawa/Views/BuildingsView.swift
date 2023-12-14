@@ -10,6 +10,8 @@ import SwiftUI
 
 struct BuildingsView: View {
 	@EnvironmentObject var lang: LanguageManager
+	@EnvironmentObject var dataStore: BuildingsDataStore
+
 	var building: Building
 	@Binding var selectedBuilding: Building?
 
@@ -23,8 +25,8 @@ struct BuildingsView: View {
 					BuildingInfoView
 				}
 			}
-			.navigationBarTitle("Building Details", displayMode: .inline)
-			.navigationBarItems(leading: NewBuildingIndicator, trailing: Button("Close") {
+			.navigationBarTitle(t("Building Details"), displayMode: .inline)
+			.navigationBarItems(leading: NewBuildingIndicator, trailing: Button(t("Close")) {
 				self.selectedBuilding = nil
 			})
 		}
@@ -34,7 +36,7 @@ struct BuildingsView: View {
 		let imgName = imageName(from: building.image)
 		return Image(imgName)
 			.resizable()
-			.accessibilityLabel("Image of \(building.imageDescription)")
+			.accessibilityLabel(t("Image of \(building.imageDescription)"))
 			.aspectRatio(contentMode: .fill)
 			.frame(height: 200, alignment: .center)
 			.clipped()
@@ -60,7 +62,7 @@ struct BuildingsView: View {
 	private var FavoriteButton: some View {
 		Button(role: .none) {} label: {
 			Image(systemName: "heart")
-			Text("Favorite")
+			Text(t("Favorite"))
 		}
 		.buttonStyle(.bordered)
 	}
@@ -68,7 +70,7 @@ struct BuildingsView: View {
 	private var ShareButton: some View {
 		Button(action: share) {
 			Image(systemName: "square.and.arrow.up")
-			Text("Share")
+			Text(t("Share"))
 		}
 		.buttonStyle(.bordered)
 	}
@@ -95,9 +97,11 @@ struct BuildingsView: View {
 
 				Spacer()
 
-				Text("00km away") // Placeholder for distance calculation
-					.font(.system(.caption, design: .default))
-					.foregroundColor(Color.black)
+				if let distance = dataStore.distanceFromUser(to: building) {
+					Text(String(format: t("%.2f km away"), distance))
+						.font(.system(.caption, design: .default))
+						.foregroundColor(Color.black)
+				}
 			}
 
 			VStack(alignment: .leading) {
@@ -107,7 +111,7 @@ struct BuildingsView: View {
 					.font(.title2).padding(.vertical, 5)
 
 				VStack(alignment: .leading) {
-					Label("Category", systemImage: "building.2.crop.circle")
+					Label(t("Category"), systemImage: "building.2.crop.circle")
 						.fontWeight(.bold)
 						.padding(.vertical, 10)
 						.font(.system(.body, design: .default))
@@ -137,14 +141,14 @@ struct BuildingsView: View {
 					}
 				}
 
-				Label("Description", systemImage: "text.justify")
+				Label(t("Description"), systemImage: "text.justify")
 					.fontWeight(.bold)
 					.font(.system(.body, design: .default))
 					.padding(.vertical, 10)
 				Text(building.description)
 					.font(.system(.body, design: .default))
 
-				Label("Features", systemImage: "list.bullet")
+				Label(t("Features"), systemImage: "list.bullet")
 					.fontWeight(.bold)
 					.padding(.vertical, 10)
 					.font(.system(.body, design: .default))
@@ -189,13 +193,20 @@ struct BuildingsView: View {
 	}
 
 	private var BuildingMap: some View {
-		VStack(alignment: .leading) {
-			Label("Map", systemImage: "map")
+		let buildingLocation = CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)
+		let initialPosition: MapCameraPosition = .camera(MapCamera(
+			centerCoordinate: buildingLocation,
+			distance: 1000,
+			pitch: 80
+		))
+
+		return VStack(alignment: .leading) {
+			Label(t("Map"), systemImage: "map")
 				.fontWeight(.bold)
 				.padding(.vertical, 10)
 				.font(.system(.body, design: .default))
-			Map {
-				Annotation("", coordinate: CLLocationCoordinate2D(latitude: building.latitude, longitude: building.longitude)) {
+			Map(initialPosition: initialPosition) {
+				Annotation("", coordinate: buildingLocation) {
 					Button(action: {
 						withAnimation {
 							self.selectedBuilding = building
@@ -219,17 +230,12 @@ struct BuildingsView: View {
 									)
 							)
 					}
-				}.tint(colorForCategory(building.category))
+				}
 			}
 		}
 		.frame(height: 300)
 		.padding(.top, selectedBuilding != nil ? 0 : 0)
 		.animation(.easeInOut, value: selectedBuilding != nil)
-		.mapControls {
-			MapUserLocationButton()
-			MapCompass()
-			MapScaleView()
-		}
 	}
 
 	private func imageName(from filename: String) -> String {
@@ -262,7 +268,7 @@ struct FeatureView: View {
 				.frame(maxWidth: 35, maxHeight: 30, alignment: .center)
 			Spacer()
 
-			Text(text)
+			Text(t(text))
 				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 				.font(.system(.body, design: .default)).multilineTextAlignment(.center)
 		}
@@ -273,4 +279,8 @@ struct FeatureView: View {
 
 #Preview {
 	ContentView()
+		.environmentObject(BuildingsDataStore())
+		.environmentObject(LanguageManager())
 }
+
+// .tint(colorForCategory(building.category))
