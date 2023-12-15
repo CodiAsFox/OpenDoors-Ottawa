@@ -18,18 +18,13 @@ struct BuildingsView: View {
 	@State private var showingShareSheet = false
 
 	var body: some View {
-		NavigationView {
-			ScrollView(.vertical, showsIndicators: true) {
-				VStack {
-					BuildingImageView
-					BuildingInfoView
-				}
+		ScrollView(.vertical, showsIndicators: true) {
+			VStack {
+				BuildingImageView
+				BuildingInfoView
 			}
-			.navigationBarTitle(t("Building Details"), displayMode: .inline)
-			.navigationBarItems(leading: NewBuildingIndicator, trailing: Button(t("Close")) {
-				self.selectedBuilding = nil
-			})
 		}
+		.navigationBarTitle(t("Building Details"), displayMode: .inline)
 	}
 
 	private var BuildingImageView: some View {

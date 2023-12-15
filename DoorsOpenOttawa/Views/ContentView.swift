@@ -18,13 +18,14 @@ struct ContentView: View {
 				HomeView()
 			}
 			.tabItem {
-				Label(t("Home"), systemImage: "house")
+				Label(t("Home"), systemImage: "building")
 			}
+			NavigationView {
+				MapView()
 
-			MapView()
-				.tabItem {
-					Label(t("Map"), systemImage: "map")
-				}
+			}.tabItem {
+				Label(t("Map"), systemImage: "map")
+			}
 
 			NavigationView {
 				SavedView()
@@ -32,13 +33,12 @@ struct ContentView: View {
 			.tabItem {
 				Label(t("Saved"), systemImage: "star.fill")
 			}
-
-			MoreView()
-				.tabItem {
-					Label(t("More"), systemImage: "ellipsis")
-				}
+			NavigationView {
+				MoreView()
+			}.tabItem {
+				Label(t("More"), systemImage: "ellipsis")
+			}
 		}
-		.tabViewStyle(.automatic)
 	}
 }
 

@@ -15,7 +15,7 @@
 		7321B3A92B0FE01500B6BB20 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */; };
 		732E4E9A2B229F9800E897C1 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732E4E992B229F9800E897C1 /* MapView.swift */; };
 		734770402B28C63800BFACD3 /* SavedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7347703F2B28C63800BFACD3 /* SavedView.swift */; };
-		73548AC32B1AC51C000D3049 /* BuildingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73548AC22B1AC51C000D3049 /* BuildingDetails.swift */; };
+		73548AC32B1AC51C000D3049 /* BuildingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73548AC22B1AC51C000D3049 /* BuildingCard.swift */; };
 		7355AA962B28048D00E637B1 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355AA952B28048D00E637B1 /* MoreView.swift */; };
 		7355AA982B2808F300E637B1 /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7355AA972B2808F300E637B1 /* LanguageManager.swift */; };
 		736E30ED2B150FD200845781 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E30EC2B150FD200845781 /* DataService.swift */; };
@@ -42,7 +42,7 @@
 		7321B3A82B0FE01500B6BB20 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		732E4E992B229F9800E897C1 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		7347703F2B28C63800BFACD3 /* SavedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedView.swift; sourceTree = "<group>"; };
-		73548AC22B1AC51C000D3049 /* BuildingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetails.swift; sourceTree = "<group>"; };
+		73548AC22B1AC51C000D3049 /* BuildingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCard.swift; sourceTree = "<group>"; };
 		7355AA952B28048D00E637B1 /* MoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
 		7355AA972B2808F300E637B1 /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		736E30EC2B150FD200845781 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 				7321B3A62B0FDF9B00B6BB20 /* HomeView.swift */,
 				732E4E992B229F9800E897C1 /* MapView.swift */,
 				7394C6152B141AEA0016A37E /* BuildingsView.swift */,
-				73548AC22B1AC51C000D3049 /* BuildingDetails.swift */,
+				73548AC22B1AC51C000D3049 /* BuildingCard.swift */,
 				7355AA952B28048D00E637B1 /* MoreView.swift */,
 				7347703F2B28C63800BFACD3 /* SavedView.swift */,
 			);
@@ -266,7 +266,7 @@
 				73CC70502B15267B00105798 /* BuildingsDataStore.swift in Sources */,
 				73D0612F2B197DA200094836 /* ShareManager.swift in Sources */,
 				732E4E9A2B229F9800E897C1 /* MapView.swift in Sources */,
-				73548AC32B1AC51C000D3049 /* BuildingDetails.swift in Sources */,
+				73548AC32B1AC51C000D3049 /* BuildingCard.swift in Sources */,
 				736E30EF2B15104E00845781 /* BuildingsModel.swift in Sources */,
 				7355AA962B28048D00E637B1 /* MoreView.swift in Sources */,
 				734770402B28C63800BFACD3 /* SavedView.swift in Sources */,

@@ -22,17 +22,10 @@ struct MapView: View {
 					Button(action: {
 						sheetBuilding = selectedBuilding
 					}) {
-						Label(t("View more"), systemImage: "chevron.up")
-							.labelStyle(.titleAndIcon)
-							.padding(.top, 10)
-							.padding(.bottom, 5)
+						Text(t("View more"))
 							.foregroundColor(.blue)
 							.font(.headline)
 							.frame(maxWidth: .infinity, alignment: .center)
-							.background(Color.white)
-							.cornerRadius(10)
-							.padding(.horizontal, 15)
-							.padding(.bottom, 10)
 					}
 				}
 
@@ -79,37 +72,18 @@ struct MapView: View {
 					MapScaleView()
 				}
 			}
-			.padding(.top, 67)
-			.sheet(item: $sheetBuilding, content: BuildingDetailSheet)
-
-			VStack {
-				HeaderView
-					.zIndex(1)
+			.sheet(item: $sheetBuilding) {
+				NavigationView {
+					BuildingDetailSheet
+				}
+//				.navigationBarItems(leading: NewBuildingIndicator, trailing: Button(t("Close")) {
+//					self.selectedBuilding = nil
+//				})
 			}
 		}
-	}
-
-	private func BuildingDetailSheet(for building: Building) -> some View {
-		BuildingsView(building: building, selectedBuilding: $sheetBuilding)
-	}
-
-	private func imageName(from filename: String) -> String {
-		let parts = filename.split(separator: ".")
-		return parts.first.map { String($0) } ?? ""
-	}
-
-	var HeaderView: some View {
-		HStack {
-			Image("logo")
-				.resizable()
-				.aspectRatio(contentMode: .fill)
-				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
-
-			Text(t("Explore"))
-				.font(.largeTitle)
-				.fontWeight(.bold)
-				.foregroundColor(Color.white)
-			Spacer()
+		.navigationTitle(t("Explore"))
+		.toolbarColorScheme(.dark, for: .navigationBar)
+		.toolbar {
 			if self.selectedBuilding != nil {
 				Button(action: {
 					self.selectedBuilding = nil
@@ -121,8 +95,33 @@ struct MapView: View {
 				}
 			}
 		}
-		.padding()
-		.background(Color("Topbar"))
+		.toolbarBackground(
+			Color("Topbar"),
+			for: .navigationBar
+		)
+		.toolbarBackground(.visible, for: .navigationBar)
+	}
+
+	private var NewBuildingIndicator: some View {
+		Group {
+			if (sheetBuilding?.isNew) != nil {
+				HStack {
+					Image("newBuilding")
+						.resizable(capInsets: EdgeInsets())
+						.aspectRatio(contentMode: .fill).padding(2)
+						.frame(width: 35, height: 35).background(.white).cornerRadius(35)
+				}.frame(width: 45, height: 45).background(Color("Topbar")).cornerRadius(35)
+			}
+		}
+	}
+
+	private func BuildingDetailSheet(for building: Building) -> some View {
+		BuildingsView(building: building, selectedBuilding: $sheetBuilding)
+	}
+
+	private func imageName(from filename: String) -> String {
+		let parts = filename.split(separator: ".")
+		return parts.first.map { String($0) } ?? ""
 	}
 }
 

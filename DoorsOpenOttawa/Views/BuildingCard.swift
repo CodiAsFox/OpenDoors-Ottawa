@@ -20,13 +20,12 @@ struct BuildingDetails: View {
 	var body: some View {
 		VStack {
 			ZStack(alignment: .topTrailing) {
-				BuildingImageView.padding(3)
+				BuildingImageView
 				NewBuildingIndicator
 			}
 			BuildingInfoView
+			Divider()
 		}
-		.padding(0)
-		.background(Color("boxBG"))
 	}
 
 	private var BuildingImageView: some View {

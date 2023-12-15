@@ -58,7 +58,5 @@ struct SelectLanguageView: View {
 		.onChange(of: languageManager.lang) {
 			languageChanged.toggle()
 		}
-		.pickerStyle(SegmentedPickerStyle())
-		.frame(width: 200)
 	}
 }
