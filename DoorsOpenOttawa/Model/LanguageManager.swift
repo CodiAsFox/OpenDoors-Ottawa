@@ -45,12 +45,12 @@ struct SelectLanguageView: View {
 	@EnvironmentObject var languageManager: LanguageManager
 
 	let languages: [(name: String, identifier: String)] = [
-		("English", "en"),
-		("French", "fr-CA"),
+		(t("English"), "en"),
+		(t("French"), "fr-CA"),
 	]
 
 	var body: some View {
-		Picker("Language", selection: $languageManager.lang) {
+		Picker(t("Language"), selection: $languageManager.lang) {
 			ForEach(languages, id: \.identifier) { language in
 				Text(language.name).tag(language.identifier)
 			}

@@ -39,27 +39,31 @@ struct BuildingsView: View {
 
 	private var BuildingInfoView: some View {
 		VStack {
+			ActionButtonsView
 			BuildingDetailsView
 			BuildingMap
-			ActionButtonsView
 		}
 		.padding(.horizontal, 15)
-		.padding(.vertical, 10)
 	}
 
 	private var ActionButtonsView: some View {
 		HStack {
-			FavoriteButton
+			NewBuildingIndicator
+			Spacer()
+			FavoriteButton(buildingId: building.buildingId)
 			ShareButton
 		}
+		.padding(.vertical, 10.0)
 	}
 
-	private var FavoriteButton: some View {
-		Button(role: .none) {} label: {
-			Image(systemName: "heart")
-			Text(t("Favorite"))
+	private func FavoriteButton(buildingId: Int) -> some View {
+		Button(role: .none) {
+			dataStore.toggleFavorite(for: buildingId)
+		} label: {
+			Text(t(dataStore.building(by: buildingId)?.isFavorite == true ? "Save" : "Saved"))
+			Image(systemName: dataStore.building(by: buildingId)?.isFavorite == true ? "star.fill" : "star")
 		}
-		.buttonStyle(.bordered)
+		.buttonStyle(.borderless)
 	}
 
 	private var ShareButton: some View {
@@ -67,7 +71,7 @@ struct BuildingsView: View {
 			Image(systemName: "square.and.arrow.up")
 			Text(t("Share"))
 		}
-		.buttonStyle(.bordered)
+		.buttonStyle(.borderless)
 	}
 
 	private var NewBuildingIndicator: some View {
@@ -273,9 +277,9 @@ struct FeatureView: View {
 }
 
 #Preview {
-	ContentView()
-		.environmentObject(BuildingsDataStore())
-		.environmentObject(LanguageManager())
+	NavigationView {
+		HomeView()
+	}
+	.environmentObject(BuildingsDataStore())
+	.environmentObject(LanguageManager())
 }
-
-// .tint(colorForCategory(building.category))

@@ -10,7 +10,8 @@ import SwiftUI
 struct MoreView: View {
 	@State private var languageChanged: Bool = false
 	@EnvironmentObject var lang: LanguageManager
-	@State private var changeLanguage = false
+	@State private var recommendBuilding = false
+	@State private var showConfirmation = false
 
 	var body: some View {
 		HStack {
@@ -21,19 +22,26 @@ struct MoreView: View {
 					Text(t("Settings"))
 				}
 				Section {
-					Button(action: { changeLanguage.toggle() }) {
+					Button(action: { recommendBuilding.toggle() }) {
 						HStack(alignment: .center) {
-							Text(t("Recomend a building"))
+							Text(t("Recommend a building"))
 							Spacer()
 							Image(systemName: "chevron.forward").foregroundColor(/*@START_MENU_TOKEN@*/ .gray/*@END_MENU_TOKEN@*/)
 						}
 					}
-					.sheet(isPresented: $changeLanguage) {
-						recomentBuilding
-							.presentationDetents([.height(300), .large])
+					.sheet(isPresented: $recommendBuilding) {
+						BuildingRecommendationForm(recommendBuilding: $recommendBuilding, showConfirmation: $showConfirmation)
+							.presentationDetents([.height(100), .large])
+					}
+					.alert(isPresented: $showConfirmation) {
+						Alert(
+							title: Text("Recommendation sent"),
+							message: Text("Thank you for your submission."),
+							dismissButton: .default(Text("OK"))
+						)
 					}
 				} header: {
-					Text(t("Feedback"))
+					Text(t("Community"))
 				}
 				Section {
 					VStack {
@@ -70,17 +78,12 @@ struct MoreView: View {
 		.toolbarBackground(.visible, for: .navigationBar)
 	}
 
-	var recomentBuilding: some View {
-		Text("AAAA")
-	}
-
 	func openWebPage(urlString: String) {
 		guard let url = URL(string: urlString) else {
 			print("Invalid URL")
 			return
 		}
 
-		// Check if the device can open the URL
 		if UIApplication.shared.canOpenURL(url) {
 			UIApplication.shared.open(url)
 		} else {
@@ -90,7 +93,9 @@ struct MoreView: View {
 }
 
 #Preview {
-	ContentView()
-		.environmentObject(BuildingsDataStore())
-		.environmentObject(LanguageManager())
+	NavigationView {
+		MoreView()
+	}
+	.environmentObject(BuildingsDataStore())
+	.environmentObject(LanguageManager())
 }

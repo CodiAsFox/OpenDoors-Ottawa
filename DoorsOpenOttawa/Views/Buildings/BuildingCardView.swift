@@ -49,10 +49,6 @@ struct BuildingDetails: View {
 
 	private var ActionButtonsView: some View {
 		HStack {
-			FavoriteButton
-
-			ShareButton
-			Spacer()
 			VStack(alignment: .center) {
 				Image(iconForCategory(building.category))
 					.resizable()
@@ -73,15 +69,22 @@ struct BuildingDetails: View {
 						lineWidth: 2
 					)
 			)
+			Text(building.category).font(/*@START_MENU_TOKEN@*/ .caption/*@END_MENU_TOKEN@*/).fontWeight(.light)
+			Spacer()
+			FavoriteButton(buildingId: building.id)
+
+			ShareButton
 		}
 	}
 
-	private var FavoriteButton: some View {
-		Button(role: .none) {} label: {
-			Image(systemName: "heart")
+	private func FavoriteButton(buildingId: Int) -> some View {
+		Button(role: .none) {
+			dataStore.toggleFavorite(for: buildingId)
+		} label: {
+			Image(systemName: dataStore.building(by: buildingId)?.isFavorite == true ? "star.fill" : "star")
 		}
 		.buttonStyle(.bordered)
-		.accessibilityLabel("Favorite")
+		.accessibilityLabel(t("Favorite"))
 	}
 
 	private var ShareButton: some View {
@@ -89,7 +92,7 @@ struct BuildingDetails: View {
 			Image(systemName: "square.and.arrow.up")
 		}
 		.buttonStyle(.bordered)
-		.accessibilityLabel("Share")
+		.accessibilityLabel(t("Share"))
 	}
 
 	private var NewBuildingIndicator: some View {
@@ -144,7 +147,9 @@ struct BuildingDetails: View {
 }
 
 #Preview {
-	ContentView()
-		.environmentObject(BuildingsDataStore())
-		.environmentObject(LanguageManager())
+	NavigationView {
+		HomeView()
+	}
+	.environmentObject(BuildingsDataStore())
+	.environmentObject(LanguageManager())
 }

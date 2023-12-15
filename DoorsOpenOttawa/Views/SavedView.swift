@@ -8,31 +8,70 @@
 import SwiftUI
 
 struct SavedView: View {
+	@EnvironmentObject var viewModel: BuildingsDataStore
+	@EnvironmentObject var lang: LanguageManager
+	@State var selectedBuilding: Building?
+	@State var isSheetPresented = false
+	@State var isSearchVisible = false
+	@State var isSearching = false
+
 	var body: some View {
-		VStack(alignment: .center) {
-			HeaderView
+		VStack(alignment: .leading) {
+			SearchView(
+				isSearching: $isSearching,
+				isSearchVisible: $isSearchVisible
+			)
+			BuildingsListView(
+				selectedBuilding: $selectedBuilding,
+				isSearching: $isSearching,
+				onlyFavs: true
+			)
 		}
-		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-	}
-
-	var HeaderView: some View {
-		HStack {
-			Image("logo")
-				.resizable()
-				.aspectRatio(contentMode: .fill)
-				.frame(maxWidth: 35, maxHeight: 10, alignment: .center)
-
-			Text(t("Saved"))
-				.font(.largeTitle)
-				.fontWeight(.bold)
-				.foregroundColor(Color.white)
-			Spacer()
+		.sheet(isPresented: $isSheetPresented) {
+			FilterOptionsSheet(
+				selectedBuilding: $selectedBuilding,
+				isSheetPresented: $isSheetPresented,
+				isSearchVisible: $isSearchVisible,
+				isSearching: $isSearching
+			)
 		}
-		.padding()
-		.background(Color("Topbar"))
+		.onReceive(NotificationCenter.default.publisher(for: .languageChanged)) { _ in
+			viewModel.loadBuildingsData()
+		}
+		.navigationTitle(t("Saved"))
+		.toolbar {
+			Group {
+				Button {
+					isSearchVisible.toggle()
+					isSearching = false
+				} label: {
+					Image(systemName: isSearchVisible ? "xmark.circle" : "magnifyingglass")
+						.frame(maxWidth: 18, alignment: .center)
+				}
+				.accessibilityLabel(isSearchVisible ? t("Close") : t("Search"))
+
+				Button {
+					isSheetPresented.toggle()
+				} label: {
+					Image(systemName: "line.3.horizontal.decrease.circle")
+						.frame(width: 18, alignment: .center)
+				}
+				.accessibilityLabel(t("Filter"))
+			}
+		}
+		.toolbarColorScheme(.dark, for: .navigationBar)
+		.toolbarBackground(
+			Color("Topbar"),
+			for: .navigationBar
+		)
+		.toolbarBackground(.visible, for: .navigationBar)
 	}
 }
 
 #Preview {
-	SavedView()
+	NavigationView {
+		SavedView()
+	}
+	.environmentObject(BuildingsDataStore())
+	.environmentObject(LanguageManager())
 }

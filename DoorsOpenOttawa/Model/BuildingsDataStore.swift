@@ -6,6 +6,7 @@
 //
 
 import Combine
+import FirebaseStorage
 import Foundation
 import MapKit
 import SwiftUI
@@ -28,21 +29,27 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 	@Published var isOCTranspoNearbyFilter: Bool = false
 	@Published var isOpenSaturdayFilter: Bool = false
 	@Published var isOpenSundayFilter: Bool = false
+	@Published var ready: Bool = false
 
 	@Published var filteredBuildings: [Building] = []
 
 	@Published var mapRegion: MKCoordinateRegion = .init(
-		center: CLLocationCoordinate2D(latitude: 45.4215, longitude: -75.6919), // Default center coordinates
-		span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05) // Default zoom level
+		center: CLLocationCoordinate2D(latitude: 45.4215, longitude: -75.6919),
+		span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
 	)
 
 	private var locationManager: CLLocationManager?
 
 	override init() {
 		super.init()
+		NetworkManager.shared.startMonitoring()
 		setupLanguageChangeListener()
 		setupLocationManager()
 		loadBuildingsData()
+	}
+
+	deinit {
+		NetworkManager.shared.stopMonitoring()
 	}
 
 	private func setupLanguageChangeListener() {
@@ -58,13 +65,12 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 		locationManager?.requestWhenInUseAuthorization()
 		locationManager?.startUpdatingLocation()
 	}
-	
+
 	func distanceFromUser(to building: Building) -> CLLocationDistance? {
 		guard let userLocation = userLocation else { return nil }
 		let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
 		return userLocation.distance(from: buildingLocation) / 1000 // Distance in kilometers
 	}
-
 
 	func locationManager(_: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 		if let location = locations.last {
@@ -72,7 +78,6 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 			updateMapRegion(with: location.coordinate)
 		}
 	}
-
 
 	func updateMapRegion(with coordinate: CLLocationCoordinate2D) {
 		let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
@@ -100,11 +105,41 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 	}
 
 	func loadBuildingsData() {
-		if isFirstLaunch() {
-			loadJsonFromAssets()
+		ready = false
+		if NetworkManager.shared.isConnected {
+			loadJsonFromFirebase { success in
+				if !success {
+					self.loadFromLocalStorageOrShowError()
+				}
+				self.ready = true
+			}
 		} else {
-			loadJsonFromAssets()
-			// loadJsonFromLocalStorage()
+			loadFromLocalStorageOrShowError()
+			ready = true
+		}
+	}
+
+	private func loadFromLocalStorageOrShowError() {
+		if loadJsonFromLocalStorage() {
+			print("Loaded data from local storage")
+		} else {
+			print("Error: Data could not be loaded from local storage or Firebase")
+		}
+	}
+
+	func loadJsonFromFirebase(completion: @escaping (Bool) -> Void) {
+		let storage = Storage.storage()
+		let jsonRef = storage.reference().child("buildings.json")
+
+		jsonRef.getData(maxSize: 1 * 1024 * 1024) { [weak self] data, error in
+			if let error = error {
+				print("Error fetching data from Firebase: \(error)")
+				completion(false)
+			} else if let data = data {
+				self?.saveToLocalStorage(jsonData: data)
+				self?.parseAndSave(jsonData: data)
+				completion(true)
+			}
 		}
 	}
 
@@ -157,16 +192,27 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 			print("Error: Couldn't load data from assets")
 			return
 		}
-		parseAndSave(jsonData: data, language: language)
-		updateCategories()
+		parseAndSave(jsonData: data)
 	}
 
-	private func parseAndSave(jsonData: Data, language: String) {
+	private func parseAndSave(jsonData: Data) {
+		var language = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en"
+
+		language = language == "fr-CA" ? "fr" : language
+
+		let favoriteBuildingIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] ?? []
+
 		do {
 			let buildingList = try JSONDecoder().decode([BuildingList].self, from: jsonData)
-			buildings = buildingList.first { $0.language == language }?.buildings ?? []
+			buildings = buildingList.first { $0.language == language }?.buildings.map { building in
+				var modifiedBuilding = building
+				modifiedBuilding.isFavorite = favoriteBuildingIDs.contains(building.id)
+
+				return modifiedBuilding
+			} ?? []
 			saveToLocalStorage(jsonData: jsonData)
 			print("Success: Loaded data for language \(language) from assets")
+			updateCategories()
 		} catch {
 			print("Error: Couldn't parse JSON data - \(error)")
 		}
@@ -176,30 +222,58 @@ class BuildingsDataStore: NSObject, ObservableObject, CLLocationManagerDelegate 
 		UserDefaults.standard.set(jsonData, forKey: "buildingsData")
 	}
 
-	// When saving favorites
 	func saveFavorites(favoriteBuildingIDs: [Int]) {
 		UserDefaults.standard.set(favoriteBuildingIDs, forKey: "favoriteBuildingIds")
 	}
 
-	// When loading buildings and updating their favorites
-	private func updateFavorites(in _: inout [Building]) {
-		//        guard let favoriteBuildingIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] else { return }
-		//        for i in buildings.indices {
-		//            buildings[i].isFavorite = favoriteBuildingIDs.contains(buildings[i].id)
-		//        }
+	private func updateFavorites() {
+		guard let favoriteBuildingIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] else { return }
+		buildings = buildings.map { building in
+			var modifiedBuilding = building
+			modifiedBuilding.isFavorite = favoriteBuildingIDs.contains(building.id)
+			return modifiedBuilding
+		}
 	}
 
-	private func loadJsonFromLocalStorage() {
-		guard let jsonData = UserDefaults.standard.data(forKey: "buildingsData") else { return }
+	func building(by id: Int) -> Building? {
+		buildings.first { $0.id == id }
+	}
+
+	func toggleFavorite(for buildingId: Int) {
+		if let index = buildings.firstIndex(where: { $0.id == buildingId }) {
+			buildings[index].isFavorite?.toggle()
+
+			var favoriteIDs = UserDefaults.standard.array(forKey: "favoriteBuildingIds") as? [Int] ?? []
+			if buildings[index].isFavorite ?? false {
+				favoriteIDs.append(buildings[index].id)
+			} else {
+				favoriteIDs.removeAll { $0 == buildings[index].id }
+			}
+
+			UserDefaults.standard.set(favoriteIDs, forKey: "favoriteBuildingIds")
+		}
+	}
+
+	private func loadJsonFromLocalStorage() -> Bool {
+		var language = UserDefaults.standard.string(forKey: "SelectedLanguage") ?? "en"
+
+		language = language == "fr-CA" ? "fr" : language
+		guard let jsonData = UserDefaults.standard.data(forKey: "buildingsData") else {
+			return false
+		}
 		do {
-			var buildingList = try JSONDecoder().decode([BuildingList].self, from: jsonData)
-			if let index = buildingList.firstIndex(where: { $0.language == "en" }) {
-				updateFavorites(in: &buildingList[index].buildings)
+			let buildingList = try JSONDecoder().decode([BuildingList].self, from: jsonData)
+			if let index = buildingList.firstIndex(where: { $0.language == language }) {
+				updateFavorites()
 				buildings = buildingList[index].buildings
+				ready = true
+				return true
 			}
 		} catch {
 			print("Error: Couldn't load data from local storage")
+			ready = true
 		}
+		return false
 	}
 
 	func updateMapRegion() {

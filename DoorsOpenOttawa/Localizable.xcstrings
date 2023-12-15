@@ -12,6 +12,20 @@
         }
       }
     },
+    "AAAA" : {
+
+    },
+    "About" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "À propos"
+          }
+        }
+      }
+    },
     "Academic Institutions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -62,7 +76,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Did you know I wrote a TV show that I'd try to pitch to networks?\n\nIt's true, and it's just as crazy as I am. I've finally put my silly humour and quirky imagination into good use."
+            "value" : "Did you know I wrote an animated TV show that I'd try to pitch to networks?\n\nIt's true, and it's just as quirky as I am. I've finally put my silly humour and wild imagination into good use."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saviez-vous que j'ai écrit une émission télévisée d'animation que j'essaierais de présenter aux réseaux ?\n\nC'est vrai, et c'est aussi bizarre que moi. J'ai enfin mis à profit mon humour idiot et mon imagination débordante."
           }
         }
       }
@@ -150,6 +170,17 @@
         }
       }
     },
+    "Community" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Communauté"
+          }
+        }
+      }
+    },
     "Community and/or Care centres" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -172,6 +203,17 @@
         }
       }
     },
+    "Developed By:" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Développé par :"
+          }
+        }
+      }
+    },
     "Embassies" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -179,6 +221,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ambassades"
+          }
+        }
+      }
+    },
+    "English" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anglais/English"
           }
         }
       }
@@ -206,6 +259,7 @@
       }
     },
     "Favorite" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -266,6 +320,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Parking gratuit"
+          }
+        }
+      }
+    },
+    "French" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "French/Français"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Français/French"
           }
         }
       }
@@ -336,6 +407,7 @@
       }
     },
     "Language" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -358,6 +430,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Langue/Language"
+          }
+        }
+      }
+    },
+    "Learn more about it!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apprenez-en davantage !"
           }
         }
       }
@@ -395,6 +478,17 @@
         }
       }
     },
+    "Name of the Building" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nom du bâtiment"
+          }
+        }
+      }
+    },
     "No Results" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -416,6 +510,9 @@
           }
         }
       }
+    },
+    "OK" : {
+
     },
     "Open Saturdays" : {
       "extractionState" : "manual",
@@ -472,6 +569,9 @@
         }
       }
     },
+    "Please try again later" : {
+
+    },
     "Public Washrooms" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -482,6 +582,20 @@
           }
         }
       }
+    },
+    "Recommend a building" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recommander un immeuble"
+          }
+        }
+      }
+    },
+    "Recommendation sent" : {
+
     },
     "Religious buildings" : {
       "extractionState" : "manual",
@@ -539,6 +653,7 @@
       }
     },
     "Share" : {
+      "extractionState" : "stale",
       "localizations" : {
         "fr-CA" : {
           "stringUnit" : {
@@ -559,6 +674,9 @@
         }
       }
     },
+    "Something went wrong" : {
+
+    },
     "Sports and Leisure buildings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -569,6 +687,20 @@
           }
         }
       }
+    },
+    "Submit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Soumettre"
+          }
+        }
+      }
+    },
+    "Thank you for your submission." : {
+
     },
     "View more" : {
       "extractionState" : "stale",
